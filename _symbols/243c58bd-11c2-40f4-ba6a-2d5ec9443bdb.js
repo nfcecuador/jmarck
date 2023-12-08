@@ -1,4 +1,4 @@
-// Icon Callouts - Updated December 7, 2023
+// Featured List - Updated December 7, 2023
 function noop() { }
 function assign(tar, src) {
     // @ts-ignore
@@ -2773,91 +2773,64 @@ let Component$1 = class Component extends SvelteComponent {
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[5] = list[i];
+	child_ctx[4] = list[i].label;
+	child_ctx[5] = list[i].icon;
 	return child_ctx;
 }
 
-// (67:4) {#each cards as card}
+// (39:4) {#each items as {label,icon}}
 function create_each_block(ctx) {
 	let li;
-	let div0;
 	let icon;
 	let t0;
-	let div2;
-	let h3;
-	let t1_value = /*card*/ ctx[5].title + "";
+	let span;
+	let t1_value = /*label*/ ctx[4] + "";
 	let t1;
 	let t2;
-	let div1;
-	let raw_value = /*card*/ ctx[5].content.html + "";
-	let t3;
 	let current;
-	icon = new Component$1({ props: { icon: /*card*/ ctx[5].icon } });
+	icon = new Component$1({ props: { icon: /*icon*/ ctx[5] } });
 
 	return {
 		c() {
 			li = element("li");
-			div0 = element("div");
 			create_component(icon.$$.fragment);
 			t0 = space();
-			div2 = element("div");
-			h3 = element("h3");
+			span = element("span");
 			t1 = text(t1_value);
 			t2 = space();
-			div1 = element("div");
-			t3 = space();
 			this.h();
 		},
 		l(nodes) {
 			li = claim_element(nodes, "LI", { class: true });
 			var li_nodes = children(li);
-			div0 = claim_element(li_nodes, "DIV", { class: true });
-			var div0_nodes = children(div0);
-			claim_component(icon.$$.fragment, div0_nodes);
-			div0_nodes.forEach(detach);
+			claim_component(icon.$$.fragment, li_nodes);
 			t0 = claim_space(li_nodes);
-			div2 = claim_element(li_nodes, "DIV", { class: true });
-			var div2_nodes = children(div2);
-			h3 = claim_element(div2_nodes, "H3", { class: true });
-			var h3_nodes = children(h3);
-			t1 = claim_text(h3_nodes, t1_value);
-			h3_nodes.forEach(detach);
-			t2 = claim_space(div2_nodes);
-			div1 = claim_element(div2_nodes, "DIV", { class: true });
-			var div1_nodes = children(div1);
-			div1_nodes.forEach(detach);
-			div2_nodes.forEach(detach);
-			t3 = claim_space(li_nodes);
+			span = claim_element(li_nodes, "SPAN", {});
+			var span_nodes = children(span);
+			t1 = claim_text(span_nodes, t1_value);
+			span_nodes.forEach(detach);
+			t2 = claim_space(li_nodes);
 			li_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(div0, "class", "icon svelte-13xgwr0");
-			attr(h3, "class", "title svelte-13xgwr0");
-			attr(div1, "class", "content svelte-13xgwr0");
-			attr(div2, "class", "body svelte-13xgwr0");
-			attr(li, "class", "svelte-13xgwr0");
+			attr(li, "class", "svelte-1n9fm19");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
-			append_hydration(li, div0);
-			mount_component(icon, div0, null);
+			mount_component(icon, li, null);
 			append_hydration(li, t0);
-			append_hydration(li, div2);
-			append_hydration(div2, h3);
-			append_hydration(h3, t1);
-			append_hydration(div2, t2);
-			append_hydration(div2, div1);
-			div1.innerHTML = raw_value;
-			append_hydration(li, t3);
+			append_hydration(li, span);
+			append_hydration(span, t1);
+			append_hydration(li, t2);
 			current = true;
 		},
 		p(ctx, dirty) {
 			const icon_changes = {};
-			if (dirty & /*cards*/ 1) icon_changes.icon = /*card*/ ctx[5].icon;
+			if (dirty & /*items*/ 1) icon_changes.icon = /*icon*/ ctx[5];
 			icon.$set(icon_changes);
-			if ((!current || dirty & /*cards*/ 1) && t1_value !== (t1_value = /*card*/ ctx[5].title + "")) set_data(t1, t1_value);
-			if ((!current || dirty & /*cards*/ 1) && raw_value !== (raw_value = /*card*/ ctx[5].content.html + "")) div1.innerHTML = raw_value;		},
+			if ((!current || dirty & /*items*/ 1) && t1_value !== (t1_value = /*label*/ ctx[4] + "")) set_data(t1, t1_value);
+		},
 		i(local) {
 			if (current) return;
 			transition_in(icon.$$.fragment, local);
@@ -2876,19 +2849,15 @@ function create_each_block(ctx) {
 
 function create_fragment(ctx) {
 	let section;
-	let header;
-	let div0;
+	let h2;
 	let t0;
 	let t1;
-	let h2;
+	let div;
+	let raw_value = /*description*/ ctx[2].html + "";
 	let t2;
-	let t3;
-	let div1;
-	let t4;
-	let t5;
 	let ul;
 	let current;
-	let each_value = /*cards*/ ctx[0];
+	let each_value = /*items*/ ctx[0];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -2902,16 +2871,11 @@ function create_fragment(ctx) {
 	return {
 		c() {
 			section = element("section");
-			header = element("header");
-			div0 = element("div");
-			t0 = text(/*superhead*/ ctx[3]);
-			t1 = space();
 			h2 = element("h2");
-			t2 = text(/*heading*/ ctx[1]);
-			t3 = space();
-			div1 = element("div");
-			t4 = text(/*subhead*/ ctx[2]);
-			t5 = space();
+			t0 = text(/*heading*/ ctx[1]);
+			t1 = space();
+			div = element("div");
+			t2 = space();
 			ul = element("ul");
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -2923,24 +2887,15 @@ function create_fragment(ctx) {
 		l(nodes) {
 			section = claim_element(nodes, "SECTION", { class: true });
 			var section_nodes = children(section);
-			header = claim_element(section_nodes, "HEADER", { class: true });
-			var header_nodes = children(header);
-			div0 = claim_element(header_nodes, "DIV", { class: true });
-			var div0_nodes = children(div0);
-			t0 = claim_text(div0_nodes, /*superhead*/ ctx[3]);
-			div0_nodes.forEach(detach);
-			t1 = claim_space(header_nodes);
-			h2 = claim_element(header_nodes, "H2", { class: true });
+			h2 = claim_element(section_nodes, "H2", { class: true });
 			var h2_nodes = children(h2);
-			t2 = claim_text(h2_nodes, /*heading*/ ctx[1]);
+			t0 = claim_text(h2_nodes, /*heading*/ ctx[1]);
 			h2_nodes.forEach(detach);
-			t3 = claim_space(header_nodes);
-			div1 = claim_element(header_nodes, "DIV", { class: true });
-			var div1_nodes = children(div1);
-			t4 = claim_text(div1_nodes, /*subhead*/ ctx[2]);
-			div1_nodes.forEach(detach);
-			header_nodes.forEach(detach);
-			t5 = claim_space(section_nodes);
+			t1 = claim_space(section_nodes);
+			div = claim_element(section_nodes, "DIV", { class: true });
+			var div_nodes = children(div);
+			div_nodes.forEach(detach);
+			t2 = claim_space(section_nodes);
 			ul = claim_element(section_nodes, "UL", { class: true });
 			var ul_nodes = children(ul);
 
@@ -2953,25 +2908,19 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div0, "class", "superhead svelte-13xgwr0");
-			attr(h2, "class", "heading svelte-13xgwr0");
-			attr(div1, "class", "subheading svelte-13xgwr0");
-			attr(header, "class", "heading-group svelte-13xgwr0");
-			attr(ul, "class", "cards svelte-13xgwr0");
-			attr(section, "class", "section-container svelte-13xgwr0");
+			attr(h2, "class", "heading");
+			attr(div, "class", "description svelte-1n9fm19");
+			attr(ul, "class", "svelte-1n9fm19");
+			attr(section, "class", "section-container");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
-			append_hydration(section, header);
-			append_hydration(header, div0);
-			append_hydration(div0, t0);
-			append_hydration(header, t1);
-			append_hydration(header, h2);
-			append_hydration(h2, t2);
-			append_hydration(header, t3);
-			append_hydration(header, div1);
-			append_hydration(div1, t4);
-			append_hydration(section, t5);
+			append_hydration(section, h2);
+			append_hydration(h2, t0);
+			append_hydration(section, t1);
+			append_hydration(section, div);
+			div.innerHTML = raw_value;
+			append_hydration(section, t2);
 			append_hydration(section, ul);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -2983,12 +2932,10 @@ function create_fragment(ctx) {
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (!current || dirty & /*superhead*/ 8) set_data(t0, /*superhead*/ ctx[3]);
-			if (!current || dirty & /*heading*/ 2) set_data(t2, /*heading*/ ctx[1]);
-			if (!current || dirty & /*subhead*/ 4) set_data(t4, /*subhead*/ ctx[2]);
-
-			if (dirty & /*cards*/ 1) {
-				each_value = /*cards*/ ctx[0];
+			if (!current || dirty & /*heading*/ 2) set_data(t0, /*heading*/ ctx[1]);
+			if ((!current || dirty & /*description*/ 4) && raw_value !== (raw_value = /*description*/ ctx[2].html + "")) div.innerHTML = raw_value;
+			if (dirty & /*items*/ 1) {
+				each_value = /*items*/ ctx[0];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -3041,20 +2988,18 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { props } = $$props;
-	let { cards } = $$props;
+	let { items } = $$props;
 	let { heading } = $$props;
-	let { subhead } = $$props;
-	let { superhead } = $$props;
+	let { description } = $$props;
 
 	$$self.$$set = $$props => {
-		if ('props' in $$props) $$invalidate(4, props = $$props.props);
-		if ('cards' in $$props) $$invalidate(0, cards = $$props.cards);
+		if ('props' in $$props) $$invalidate(3, props = $$props.props);
+		if ('items' in $$props) $$invalidate(0, items = $$props.items);
 		if ('heading' in $$props) $$invalidate(1, heading = $$props.heading);
-		if ('subhead' in $$props) $$invalidate(2, subhead = $$props.subhead);
-		if ('superhead' in $$props) $$invalidate(3, superhead = $$props.superhead);
+		if ('description' in $$props) $$invalidate(2, description = $$props.description);
 	};
 
-	return [cards, heading, subhead, superhead, props];
+	return [items, heading, description, props];
 }
 
 class Component extends SvelteComponent {
@@ -3062,11 +3007,10 @@ class Component extends SvelteComponent {
 		super();
 
 		init(this, options, instance, create_fragment, safe_not_equal, {
-			props: 4,
-			cards: 0,
+			props: 3,
+			items: 0,
 			heading: 1,
-			subhead: 2,
-			superhead: 3
+			description: 2
 		});
 	}
 }
