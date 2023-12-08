@@ -1,4 +1,4 @@
-// Featured List - Updated December 8, 2023
+// Box - Updated December 8, 2023
 function noop() { }
 function assign(tar, src) {
     // @ts-ignore
@@ -2773,26 +2773,26 @@ let Component$1 = class Component extends SvelteComponent {
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[4] = list[i].label;
-	child_ctx[5] = list[i].icon;
+	child_ctx[4] = list[i];
 	return child_ctx;
 }
 
-// (39:4) {#each items as {label,icon}}
+// (48:6) {#each buttons as button}
 function create_each_block(ctx) {
-	let li;
+	let a;
 	let icon;
 	let t0;
 	let span;
-	let t1_value = /*label*/ ctx[4] + "";
+	let t1_value = /*button*/ ctx[4].link.label + "";
 	let t1;
 	let t2;
+	let a_href_value;
 	let current;
-	icon = new Component$1({ props: { icon: /*icon*/ ctx[5] } });
+	icon = new Component$1({ props: { icon: /*button*/ ctx[4].icon } });
 
 	return {
 		c() {
-			li = element("li");
+			a = element("a");
 			create_component(icon.$$.fragment);
 			t0 = space();
 			span = element("span");
@@ -2801,35 +2801,40 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			li = claim_element(nodes, "LI", { class: true });
-			var li_nodes = children(li);
-			claim_component(icon.$$.fragment, li_nodes);
-			t0 = claim_space(li_nodes);
-			span = claim_element(li_nodes, "SPAN", {});
+			a = claim_element(nodes, "A", { class: true, href: true });
+			var a_nodes = children(a);
+			claim_component(icon.$$.fragment, a_nodes);
+			t0 = claim_space(a_nodes);
+			span = claim_element(a_nodes, "SPAN", {});
 			var span_nodes = children(span);
 			t1 = claim_text(span_nodes, t1_value);
 			span_nodes.forEach(detach);
-			t2 = claim_space(li_nodes);
-			li_nodes.forEach(detach);
+			t2 = claim_space(a_nodes);
+			a_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(li, "class", "svelte-1n9fm19");
+			attr(a, "class", "button svelte-o9z257");
+			attr(a, "href", a_href_value = /*button*/ ctx[4].link.url);
 		},
 		m(target, anchor) {
-			insert_hydration(target, li, anchor);
-			mount_component(icon, li, null);
-			append_hydration(li, t0);
-			append_hydration(li, span);
+			insert_hydration(target, a, anchor);
+			mount_component(icon, a, null);
+			append_hydration(a, t0);
+			append_hydration(a, span);
 			append_hydration(span, t1);
-			append_hydration(li, t2);
+			append_hydration(a, t2);
 			current = true;
 		},
 		p(ctx, dirty) {
 			const icon_changes = {};
-			if (dirty & /*items*/ 1) icon_changes.icon = /*icon*/ ctx[5];
+			if (dirty & /*buttons*/ 2) icon_changes.icon = /*button*/ ctx[4].icon;
 			icon.$set(icon_changes);
-			if ((!current || dirty & /*items*/ 1) && t1_value !== (t1_value = /*label*/ ctx[4] + "")) set_data(t1, t1_value);
+			if ((!current || dirty & /*buttons*/ 2) && t1_value !== (t1_value = /*button*/ ctx[4].link.label + "")) set_data(t1, t1_value);
+
+			if (!current || dirty & /*buttons*/ 2 && a_href_value !== (a_href_value = /*button*/ ctx[4].link.url)) {
+				attr(a, "href", a_href_value);
+			}
 		},
 		i(local) {
 			if (current) return;
@@ -2841,7 +2846,7 @@ function create_each_block(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(li);
+			if (detaching) detach(a);
 			destroy_component(icon);
 		}
 	};
@@ -2849,15 +2854,16 @@ function create_each_block(ctx) {
 
 function create_fragment(ctx) {
 	let section;
+	let div2;
 	let h2;
 	let t0;
 	let t1;
-	let div;
-	let raw_value = /*description*/ ctx[2].html + "";
+	let div0;
+	let raw_value = /*body*/ ctx[0].html + "";
 	let t2;
-	let ul;
+	let div1;
 	let current;
-	let each_value = /*items*/ ctx[0];
+	let each_value = /*buttons*/ ctx[1];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -2871,12 +2877,13 @@ function create_fragment(ctx) {
 	return {
 		c() {
 			section = element("section");
+			div2 = element("div");
 			h2 = element("h2");
-			t0 = text(/*heading*/ ctx[1]);
+			t0 = text(/*heading*/ ctx[2]);
 			t1 = space();
-			div = element("div");
+			div0 = element("div");
 			t2 = space();
-			ul = element("ul");
+			div1 = element("div");
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
@@ -2887,55 +2894,60 @@ function create_fragment(ctx) {
 		l(nodes) {
 			section = claim_element(nodes, "SECTION", { class: true });
 			var section_nodes = children(section);
-			h2 = claim_element(section_nodes, "H2", { class: true });
+			div2 = claim_element(section_nodes, "DIV", { class: true });
+			var div2_nodes = children(div2);
+			h2 = claim_element(div2_nodes, "H2", { class: true });
 			var h2_nodes = children(h2);
-			t0 = claim_text(h2_nodes, /*heading*/ ctx[1]);
+			t0 = claim_text(h2_nodes, /*heading*/ ctx[2]);
 			h2_nodes.forEach(detach);
-			t1 = claim_space(section_nodes);
-			div = claim_element(section_nodes, "DIV", { class: true });
-			var div_nodes = children(div);
-			div_nodes.forEach(detach);
-			t2 = claim_space(section_nodes);
-			ul = claim_element(section_nodes, "UL", { class: true });
-			var ul_nodes = children(ul);
+			t1 = claim_space(div2_nodes);
+			div0 = claim_element(div2_nodes, "DIV", { class: true });
+			var div0_nodes = children(div0);
+			div0_nodes.forEach(detach);
+			t2 = claim_space(div2_nodes);
+			div1 = claim_element(div2_nodes, "DIV", { class: true });
+			var div1_nodes = children(div1);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].l(ul_nodes);
+				each_blocks[i].l(div1_nodes);
 			}
 
-			ul_nodes.forEach(detach);
+			div1_nodes.forEach(detach);
+			div2_nodes.forEach(detach);
 			section_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading");
-			attr(div, "class", "description svelte-1n9fm19");
-			attr(ul, "class", "svelte-1n9fm19");
-			attr(section, "class", "section-container");
+			attr(h2, "class", "heading svelte-o9z257");
+			attr(div0, "class", "body svelte-o9z257");
+			attr(div1, "class", "buttons svelte-o9z257");
+			attr(div2, "class", "card svelte-o9z257");
+			attr(section, "class", "section-container svelte-o9z257");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
-			append_hydration(section, h2);
+			append_hydration(section, div2);
+			append_hydration(div2, h2);
 			append_hydration(h2, t0);
-			append_hydration(section, t1);
-			append_hydration(section, div);
-			div.innerHTML = raw_value;
-			append_hydration(section, t2);
-			append_hydration(section, ul);
+			append_hydration(div2, t1);
+			append_hydration(div2, div0);
+			div0.innerHTML = raw_value;
+			append_hydration(div2, t2);
+			append_hydration(div2, div1);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				if (each_blocks[i]) {
-					each_blocks[i].m(ul, null);
+					each_blocks[i].m(div1, null);
 				}
 			}
 
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (!current || dirty & /*heading*/ 2) set_data(t0, /*heading*/ ctx[1]);
-			if ((!current || dirty & /*description*/ 4) && raw_value !== (raw_value = /*description*/ ctx[2].html + "")) div.innerHTML = raw_value;
-			if (dirty & /*items*/ 1) {
-				each_value = /*items*/ ctx[0];
+			if (!current || dirty & /*heading*/ 4) set_data(t0, /*heading*/ ctx[2]);
+			if ((!current || dirty & /*body*/ 1) && raw_value !== (raw_value = /*body*/ ctx[0].html + "")) div0.innerHTML = raw_value;
+			if (dirty & /*buttons*/ 2) {
+				each_value = /*buttons*/ ctx[1];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -2948,7 +2960,7 @@ function create_fragment(ctx) {
 						each_blocks[i] = create_each_block(child_ctx);
 						each_blocks[i].c();
 						transition_in(each_blocks[i], 1);
-						each_blocks[i].m(ul, null);
+						each_blocks[i].m(div1, null);
 					}
 				}
 
@@ -2988,18 +3000,18 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { props } = $$props;
-	let { items } = $$props;
+	let { body } = $$props;
+	let { buttons } = $$props;
 	let { heading } = $$props;
-	let { description } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('props' in $$props) $$invalidate(3, props = $$props.props);
-		if ('items' in $$props) $$invalidate(0, items = $$props.items);
-		if ('heading' in $$props) $$invalidate(1, heading = $$props.heading);
-		if ('description' in $$props) $$invalidate(2, description = $$props.description);
+		if ('body' in $$props) $$invalidate(0, body = $$props.body);
+		if ('buttons' in $$props) $$invalidate(1, buttons = $$props.buttons);
+		if ('heading' in $$props) $$invalidate(2, heading = $$props.heading);
 	};
 
-	return [items, heading, description, props];
+	return [body, buttons, heading, props];
 }
 
 class Component extends SvelteComponent {
@@ -3008,9 +3020,9 @@ class Component extends SvelteComponent {
 
 		init(this, options, instance, create_fragment, safe_not_equal, {
 			props: 3,
-			items: 0,
-			heading: 1,
-			description: 2
+			body: 0,
+			buttons: 1,
+			heading: 2
 		});
 	}
 }
