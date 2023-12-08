@@ -1317,13 +1317,13 @@ function create_fragment(ctx) {
 		h() {
 			if (!src_url_equal(img.src, img_src_value = /*portrait*/ ctx[1].image.url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*portrait*/ ctx[1].image.alt);
-			attr(img, "class", "svelte-1ilv089");
-			attr(figure, "class", "svelte-1ilv089");
+			attr(img, "class", "svelte-12cynel");
+			attr(figure, "class", "svelte-12cynel");
 			toggle_class(figure, "square", /*portrait*/ ctx[1].variation === "square");
-			attr(h1, "class", "headline svelte-1ilv089");
-			attr(div0, "class", "description svelte-1ilv089");
-			attr(div1, "class", "svelte-1ilv089");
-			attr(div2, "class", "section-container svelte-1ilv089");
+			attr(h1, "class", "headline svelte-12cynel");
+			attr(div0, "class", "description svelte-12cynel");
+			attr(div1, "class", "svelte-12cynel");
+			attr(div2, "class", "section-container svelte-12cynel");
 		},
 		m(target, anchor) {
 			insert_hydration(target, header, anchor);
