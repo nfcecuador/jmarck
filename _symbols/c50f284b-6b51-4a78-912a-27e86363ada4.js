@@ -2814,7 +2814,7 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "class", "button svelte-f6w6mi");
+			attr(a, "class", "button svelte-1n35255");
 			attr(a, "href", a_href_value = /*button*/ ctx[4].link.url);
 		},
 		m(target, anchor) {
@@ -2918,11 +2918,11 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading svelte-f6w6mi");
-			attr(div0, "class", "body svelte-f6w6mi");
-			attr(div1, "class", "buttons svelte-f6w6mi");
-			attr(div2, "class", "card svelte-f6w6mi");
-			attr(section, "class", "section-container svelte-f6w6mi");
+			attr(h2, "class", "heading svelte-1n35255");
+			attr(div0, "class", "body svelte-1n35255");
+			attr(div1, "class", "buttons svelte-1n35255");
+			attr(div2, "class", "card svelte-1n35255");
+			attr(section, "class", "section-container svelte-1n35255");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
